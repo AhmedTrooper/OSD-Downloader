@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{  padding: 0;
+  margin: 0;
+background-color: #26282A;
+  color: white;
+}
+
+*{
+  font-family: "Roboto Mono", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+body {
+  /*background-color: red;*/
+  width: 100vw;
+  height: 100vh;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  /*background-color: green;*/
+  align-content: start;
+
+}
+
+.img {
+  width:20px
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar in WebKit browsers (e.g., Chrome, Safari) */
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Hides the scrollbar in Internet Explorer and Edge */
+  scrollbar-width: none; /* Hides the scrollbar in Firefox */
+}
