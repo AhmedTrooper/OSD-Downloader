@@ -13,7 +13,7 @@ export default function NavbarComponent() {
     // Component's data......
 
     const [fileFormatList, setFileFormatList] = useState([]);
-    const [fileUrl, setFileUrl] = useState("");
+    const [fileUrl, setFileUrl] = useState("https://www.youtube.com/watch?v=EFCeh3mxqCA");
     const fileRef = useRef();
     const [videoTitle, setVideoTitle] = useState("");
     const {showDialogBox,setShowDialogBox} = useContext(DataContext);
@@ -110,24 +110,43 @@ export default function NavbarComponent() {
                 if(getFileFormatListCommand.code===0) {
                     formatDetailsString=getFileFormatListCommand.stdout;
                 };
-                 
 
+                let formatArr = formatDetailsString.split("\n");
+                let count = 0;
+                let startingIndex = 0;
+                formatArr.map(e=>{
+                    if(e.startsWith("------------")){
+                        startingIndex = count;
+                    } else {
+                        count++;
+                    }
+                });
 
-
-// Find only ID,resolution and file extension using RegX and list them in an array of object
-                const regex = /([a-zA-Z0-9]+)\s+(\w+)\s+((\d+x\d+)|audio\s+only)/g;
-                let matches;
-                const results = [];
-
-                while ((matches = regex.exec(formatDetailsString)) !== null) {
-                    results.push({
-                        id: matches[1],
-                        format: matches[2],
-                        resolution: matches[3]
-                    });
+                let filteredArr =[];
+                let diff = formatArr.length - startingIndex;
+                for(let x = 1;x<diff-1;x++){
+                    filteredArr[x] = formatArr[x + startingIndex];
                 }
 
-               setFileFormatList(results);
+                let arrToContainFormatObject = [];
+
+                //filteredArr contains the filtered items only
+                filteredArr.map(item=>{
+                    let tempArr = [];
+
+                    item.split(" ").map(e=>{
+                        if(e !=="") tempArr.push(e);
+                    });
+                    arrToContainFormatObject.push({
+                        id:tempArr[0],
+                        format:tempArr[1],
+                        resolution:tempArr[2]
+
+                    });
+
+                });
+
+               setFileFormatList(arrToContainFormatObject);
 
 
 

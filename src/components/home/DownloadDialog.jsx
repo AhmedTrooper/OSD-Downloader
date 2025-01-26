@@ -251,7 +251,7 @@ console.log(e);
                                     className={"w-full  justify-self-center text-xl h-fit font-bold shadow-lg rounded-sm hover:cursor-pointer hover:bg-red-500 p-2 text-center hover:rounded-sm"}
                                     onClick={() => setSelectedFile(fileFormat.id + '____' + fileFormat["format"] + '_' + fileFormat["resolution"] + '_')}
                                 >
-                                    {fileFormat["format"].toUpperCase()} || {fileFormat["resolution"].toUpperCase()}
+                                   {fileFormat["id"].toUpperCase()} || {fileFormat["format"].toUpperCase()} || {fileFormat["resolution"].toUpperCase()}
 
                                 </li>
                             ))) : (<li className={"h-fit self-center justify-self-center"}>
