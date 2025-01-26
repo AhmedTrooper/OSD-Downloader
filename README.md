@@ -8,10 +8,10 @@ Application binary is more than 100MB as it bundles 4 binary packages:
 
 - ffprobe
 
-# If the size is increased, why bundle those external binaries?
+## If the size is increased, why bundle those external binaries?
 - Otherwise, the users would need to install them manually and add them to the environment variable, just to eliminate user's efforts...
 
-# Used Tauri plugins:
+## Used Tauri plugins:
 - plugin-shell
 
 - plugin-opener
@@ -20,10 +20,10 @@ Application binary is more than 100MB as it bundles 4 binary packages:
 
 - plugin-clipboard-manager
 
-# License
+## License
 - This project is licensed under the [MIT] License. See the LICENSE file for details.
 
-# Acknowledgments
+## Acknowledgments
 - yt-dlp: For providing an extensive library of supported sites and formats.
 
 - Tauri: For enabling lightweight and efficient desktop app development.
@@ -32,4 +32,4 @@ Application binary is more than 100MB as it bundles 4 binary packages:
 
 - ReactJS: For building a modern and responsive user interface.
 
-# Enjoy downloading videos with OSD Downloader! 🎥🚀
+## Enjoy downloading videos with OSD Downloader! 🎥🚀
