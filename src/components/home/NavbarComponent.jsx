@@ -13,7 +13,7 @@ export default function NavbarComponent() {
     // Component's data......
 
     const [fileFormatList, setFileFormatList] = useState([]);
-    const [fileUrl, setFileUrl] = useState("https://www.youtube.com/watch?v=EFCeh3mxqCA");
+    const [fileUrl, setFileUrl] = useState("");
     const fileRef = useRef();
     const [videoTitle, setVideoTitle] = useState("");
     const {showDialogBox,setShowDialogBox} = useContext(DataContext);
