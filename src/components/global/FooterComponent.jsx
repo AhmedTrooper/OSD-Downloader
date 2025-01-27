@@ -2,7 +2,9 @@ import {Fragment} from "react";
 import {NavLink, Route} from "react-router";
 import SettingImage from "../../assets/images/settings.png"
 import DownloadsImage from "../../assets/images/downloads.png"
-import GithubImage from "../../assets/images/github.png"
+import GithubImage from "../../assets/images/github.png";
+import TutorialImage from "../../assets/images/tutorial.png"
+
 
 export default function FooterComponent(){
     return <Fragment>
@@ -15,8 +17,8 @@ export default function FooterComponent(){
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/settings"}>
-                        <img src={SettingImage} alt="setting" className={"w-6"}/>
+                    <NavLink to={"/tutorial"}>
+                        <img src={TutorialImage} alt="setting" className={"w-6"}/>
                     </NavLink>
                 </li>
             </ul>

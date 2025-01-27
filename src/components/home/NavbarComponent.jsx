@@ -147,6 +147,7 @@ export default function NavbarComponent() {
                 });
 
                setFileFormatList(arrToContainFormatObject);
+               console.log(arrToContainFormatObject)
 
 
 
