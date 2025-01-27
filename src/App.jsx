@@ -16,17 +16,17 @@ function App() {
    
   // Right click disable
   useEffect(() => {
-    // const disableRightClick = (e) => {
-    //   e.preventDefault();
-    // };
+    const disableRightClick = (e) => {
+      e.preventDefault();
+    };
 
     // Adding event listener to  the main document
-    // document.addEventListener("contextmenu", disableRightClick);
+    document.addEventListener("contextmenu", disableRightClick);
 
     // Cleanup to remove memory leaks....
-    // return () => {
-    //   document.removeEventListener("contextmenu", disableRightClick);
-    // };
+    return () => {
+      document.removeEventListener("contextmenu", disableRightClick);
+    };
   }, []); 
 
 
