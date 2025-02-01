@@ -19,7 +19,14 @@ export default function NavbarComponent() {
     const [fileUrl, setFileUrl] = useState("");
     const fileRef = useRef();
     const [videoTitle, setVideoTitle] = useState("");
-    const {showDialogBox,setShowDialogBox,showPlaylistDialogBox,setShowPlaylistDialogBox} = useContext(DataContext);
+    const {
+        showDialogBox,
+        setShowDialogBox,
+        showPlaylistDialogBox,
+        setShowPlaylistDialogBox,
+        setPlaylistLinkArr,
+        playlistLinkArr
+    } = useContext(DataContext);
 
 
     
@@ -187,6 +194,64 @@ if(formatDetailsString){
     const handlePlaylist = async ()=>{
         try{
              setShowPlaylistDialogBox(true);
+             //command to get file title.....
+             const commandToFetchPlaylist = Command.sidecar('bin/ytdl', [
+                "--flat-playlist",
+                "--get-title",
+                "--get-url",
+                `${fileUrl}`
+            ]);
+
+        
+            let dataArr = [];
+            let titleArr = [];
+            let urlArr = [];
+            let dataObject = [];
+
+            commandToFetchPlaylist.stdout.on("data",(data)=>{
+            dataArr.push(data);
+            // console.log(dataArr);
+           
+
+            console.log(titleArr,urlArr);
+
+
+            });
+
+            commandToFetchPlaylist.on("close",()=>{
+                dataArr.map((item,index)=>{
+                    if(index%2===0){
+                    titleArr.push(item);
+                    } else {
+                    urlArr.push(item);
+                    }
+                                });
+
+                for(let i=0;i<titleArr.length;i++){
+                    dataObject.push({
+                        title:titleArr[i],
+                        siteUrl:urlArr[i],
+                    });
+                    
+                };
+
+                setPlaylistLinkArr(dataObject);
+
+
+            })
+
+          
+
+            commandToFetchPlaylist.stderr.on("data",(data)=>{
+                console.log("Command error",data);
+            });
+
+            // console.log("\n\n\n",await commandToFetchPlaylist.execute(),"\n\n\n");
+
+               await commandToFetchPlaylist.spawn();
+             
+
+
         } catch(e){
             console.log("Error in playlist handling :",e);
         }

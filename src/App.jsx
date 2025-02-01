@@ -14,28 +14,23 @@ function App() {
     const [downloadListArr,setDownloadListArr] = useState([]);
     const [showDialogBox, setShowDialogBox] = useState(false);
     const [showPlaylistDialogBox,setShowPlaylistDialogBox] = useState(false);
-    const [playlistLinkArr,setPlaylistLinkArr] = useState([
-      {
-        title:"Best Bangladeshi food",
-        siteUrl:"https://www.youtube.com/watch?v=GVsUOuSjvcg"
-      }
-    ]);
+    const [playlistLinkArr,setPlaylistLinkArr] = useState([]);
 
    
-  // Right click disable
-  useEffect(() => {
-    const disableRightClick = (e) => {
-      e.preventDefault();
-    };
+  // // Right click disable
+  // useEffect(() => {
+  //   const disableRightClick = (e) => {
+  //     e.preventDefault();
+  //   };
 
-    // Adding event listener to  the main document
-    document.addEventListener("contextmenu", disableRightClick);
+  //   // Adding event listener to  the main document
+  //   document.addEventListener("contextmenu", disableRightClick);
 
-    // Cleanup to remove memory leaks....
-    return () => {
-      document.removeEventListener("contextmenu", disableRightClick);
-    };
-  }, []); 
+  //   // Cleanup to remove memory leaks....
+  //   return () => {
+  //     document.removeEventListener("contextmenu", disableRightClick);
+  //   };
+  // }, []); 
 
 
 
