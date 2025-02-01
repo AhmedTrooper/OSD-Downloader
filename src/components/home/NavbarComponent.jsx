@@ -2,8 +2,10 @@ import {createContext, Fragment, useContext, useEffect, useRef, useState} from "
 import ImageType from "./ImageType.jsx";
 import PasteImage from "../../assets/images/paste.png";
 import DownloadImage from "../../assets/images/downloads.png";
+import PlaylistImage from "../../assets/images/playlist.png";
 import { Command } from '@tauri-apps/plugin-shell';
 import DownloadDialog from "./DownloadDialog.jsx";
+import PlaylistDialog from "./PlaylistDialog.jsx";
 import {DataContext} from "../../App.jsx";
 import {  readText } from '@tauri-apps/plugin-clipboard-manager';
 
@@ -11,15 +13,16 @@ export const NavbarDataContext = createContext();
 export default function NavbarComponent() {
 
     // Component's data......
+    
 
     const [fileFormatList, setFileFormatList] = useState([]);
     const [fileUrl, setFileUrl] = useState("");
     const fileRef = useRef();
     const [videoTitle, setVideoTitle] = useState("");
-    const {showDialogBox,setShowDialogBox} = useContext(DataContext);
+    const {showDialogBox,setShowDialogBox,showPlaylistDialogBox,setShowPlaylistDialogBox} = useContext(DataContext);
 
 
-
+    
 
     // Component's Effects......
 
@@ -76,6 +79,7 @@ export default function NavbarComponent() {
 
     const fetchData = async () => {
         try {
+            // console.log("Fetched is called")
             setFileFormatList([]);
             setVideoTitle("");
             setShowDialogBox(true);
@@ -88,7 +92,9 @@ export default function NavbarComponent() {
                     `${fileUrl}`
                 ]);
 
+
                 let titleFetchCommandStatus = await commandToFetchTitle.execute();
+                // console.log(titleFetchCommandStatus)
 
                 // setVideoTitle();
                 if((titleFetchCommandStatus).code===0){
@@ -111,52 +117,63 @@ export default function NavbarComponent() {
                     formatDetailsString=getFileFormatListCommand.stdout;
                 };
 
-                let formatArr = formatDetailsString.split("\n");
-                let count = 0;
-                let startingIndex = 0;
-                formatArr.map(e=>{
-                    if(e.startsWith("------------")){
-                        startingIndex = count;
-                    } else {
-                        count++;
-                    }
-                });
+// console.log("Format details is :",formatDetailsString);
+if(formatDetailsString){
+    let formatArr = formatDetailsString.split("\n");
 
-                let filteredArr =[];
-                let diff = formatArr.length - startingIndex;
-                for(let x = 1;x<diff-1;x++){
-                    filteredArr[x] = formatArr[x + startingIndex];
-                }
+    let count = 0;
+    let startingIndex = 0;
+    formatArr.map(e=>{
+        if(e.startsWith("------------")){
+            startingIndex = count;
+        } else {
+            count++;
+        }
+    });
 
-                let arrToContainFormatObject = [];
+    let filteredArr =[];
+    let diff = formatArr.length - startingIndex;
+    for(let x = 1;x<diff-1;x++){
+        filteredArr[x] = formatArr[x + startingIndex];
+    }
 
-                //filteredArr contains the filtered items only
-                filteredArr.map(item=>{
-                    let tempArr = [];
+    let arrToContainFormatObject = [];
 
-                    item.split(" ").map(e=>{
-                        if(e !=="") tempArr.push(e);
-                    });
-                    arrToContainFormatObject.push({
-                        id:tempArr[0],
-                        format:tempArr[1],
-                        resolution:tempArr[2]
+    //filteredArr contains the filtered items only
+    filteredArr.map(item=>{
+        let tempArr = [];
+        // console.log("Item is : ",item)
 
-                    });
+        item.split(" ").map(e=>{
+            if(e !=="") tempArr.push(e);
+        });
+        arrToContainFormatObject.push({
+            id:tempArr[0],
+            format:tempArr[1],
+            resolution:tempArr[2]
 
-                });
+        });
 
-               setFileFormatList(arrToContainFormatObject);
-               console.log(arrToContainFormatObject)
+    });
+
+   setFileFormatList(arrToContainFormatObject);
+//    console.log(arrToContainFormatObject)
+} else {
+    setFileFormatList([])
+}
+
+
+             
 
 
 
 
             } else {
-                alert("Wrong URL");
+               setShowDialogBox(false);
             }
         } catch (e) {
-            console.log(e)
+            
+            console.log("Error occured:",`${e}`);
         }
     }
 
@@ -166,18 +183,27 @@ export default function NavbarComponent() {
         setFileUrl(event.target.value);
     }
     
+
+    const handlePlaylist = async ()=>{
+        try{
+             setShowPlaylistDialogBox(true);
+        } catch(e){
+            console.log("Error in playlist handling :",e);
+        }
+       
+    }
     
     
 
 
 // Rendered content
     return (
-        <Fragment>
+        <NavbarDataContext.Provider value={{setFileFormatList,setVideoTitle,fileFormatList,videoTitle,fileUrl,fetchData,setFileUrl}}>
             <ul className={"h-fit p-3 grid grid-cols-12 w-[50vw] items-center gap-5 self-start bg-transparent"}>
-               <li key={0} className={"col-span-3"} onClick={async ()=> setFileUrl(await readText())}>
+               <li className={"col-span-3"} onClick={async ()=> setFileUrl(await readText())}>
                    <ImageType imageType={PasteImage}/>
                </li>
-                <li key={1} className={"col-span-6"}>
+                <li className={"col-span-5"}>
                     <input
                         ref={fileRef}
                         onChange={handleInput}
@@ -186,24 +212,36 @@ export default function NavbarComponent() {
                         className={"text-green-500 valid-link shadow-sm shadow-black p-2 rounded-sm w-full focus:outline-none focus:shadow-outline placeholder:font-bold"}
                     />
                 </li>
-                <li key={2} className={"col-span-3 rounded-md shadow-sm shadow-black w-fit"} onClick={fetchData}>
+                <li className={"col-span-2 rounded-md shadow-sm shadow-black w-fit"} onClick={fetchData}>
                     <ImageType imageType={DownloadImage}/>
+                </li>
+                <li className={"col-span-2 rounded-md shadow-sm shadow-black w-fit"} onClick={handlePlaylist}>
+                    <ImageType imageType={PlaylistImage}/>
                 </li>
 
             </ul>
 
 
-            {/*Logic to show dialog box...*/}
+            {/*Logic to show dialog box and playlist box...*/}
+ 
+
             {
-                !showDialogBox ?
-                    null :
-                    <NavbarDataContext.Provider value={{setFileFormatList,setVideoTitle,fileFormatList,videoTitle,fileUrl}}>
+                showDialogBox &&
                         <DownloadDialog  />
-                    </NavbarDataContext.Provider>
             }
 
+            {
+                showPlaylistDialogBox &&
+                       <PlaylistDialog />
+            }
+
+</NavbarDataContext.Provider>
 
 
-        </Fragment>
+
+
+
+
+       
     );
 }

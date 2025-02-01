@@ -13,6 +13,14 @@ export const DataContext = createContext();
 function App() {
     const [downloadListArr,setDownloadListArr] = useState([]);
     const [showDialogBox, setShowDialogBox] = useState(false);
+    const [showPlaylistDialogBox,setShowPlaylistDialogBox] = useState(false);
+    const [playlistLinkArr,setPlaylistLinkArr] = useState([
+      {
+        title:"Best Bangladeshi food",
+        siteUrl:"https://www.youtube.com/watch?v=GVsUOuSjvcg"
+      }
+    ]);
+
    
   // Right click disable
   useEffect(() => {
@@ -65,6 +73,10 @@ function App() {
            setDownloadListArr,
            showDialogBox,
             setShowDialogBox,
+            showPlaylistDialogBox,
+            setShowPlaylistDialogBox,
+            playlistLinkArr,
+            setPlaylistLinkArr
             
           }}>
           <Routes>
