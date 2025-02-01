@@ -17,20 +17,20 @@ function App() {
     const [playlistLinkArr,setPlaylistLinkArr] = useState([]);
 
    
-  // // Right click disable
-  // useEffect(() => {
-  //   const disableRightClick = (e) => {
-  //     e.preventDefault();
-  //   };
+  // Right click disable
+  useEffect(() => {
+    const disableRightClick = (e) => {
+      e.preventDefault();
+    };
 
-  //   // Adding event listener to  the main document
-  //   document.addEventListener("contextmenu", disableRightClick);
+    // Adding event listener to  the main document
+    document.addEventListener("contextmenu", disableRightClick);
 
-  //   // Cleanup to remove memory leaks....
-  //   return () => {
-  //     document.removeEventListener("contextmenu", disableRightClick);
-  //   };
-  // }, []); 
+    // Cleanup to remove memory leaks....
+    return () => {
+      document.removeEventListener("contextmenu", disableRightClick);
+    };
+  }, []); 
 
 
 
