@@ -2,7 +2,7 @@ import { ApplicationInterface } from "@/interfaces/application/ApplicationInterf
 import { create } from "zustand";
 import { getVersion } from "@tauri-apps/api/app";
 import { Command } from "@tauri-apps/plugin-shell";
-import { MetadataInterface } from "@/interfaces/application/MetaData";
+import { MetadataInterface } from "@/interfaces/application/Metadata";
 import { addToast } from "@heroui/react";
 
 export const useApplicationstore = create<ApplicationInterface>((set, get) => ({
@@ -13,7 +13,7 @@ export const useApplicationstore = create<ApplicationInterface>((set, get) => ({
   setMetadataInformation: (metadata: null | MetadataInterface) =>
     set({ metadataInformation: metadata }),
   metadataUrl:
-    "https://raw.githubusercontent.com/AhmedTrooper/OSGUI/main/update/metadata.json",
+    "https://raw.githubusercontent.com/AhmedTrooper/OSD-Downloader/main/update/metadata.json",
   appVersion: null,
   setAppVersion: (v: string | null) => set({ appVersion: v }),
   onlineApplicationVersion: null,

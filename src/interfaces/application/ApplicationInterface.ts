@@ -1,6 +1,6 @@
 
 
-import { MetadataInterface } from "./MetaData";
+import { MetadataInterface } from "./Metadata";
 
 export interface ApplicationInterface {
   metadataUrl: string;

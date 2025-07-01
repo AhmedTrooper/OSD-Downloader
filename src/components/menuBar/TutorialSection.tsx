@@ -5,7 +5,7 @@ export default function TutorialSection() {
     <div className="grid grid-cols-2 items-center justify-items-center">
       <a
         target="_blank"
-        href="https://github.com/AhmedTrooper/OSGUI"
+        href="https://github.com/AhmedTrooper"
       >
         <FaGithub className="text-white cursor-pointer" />
       </a>
