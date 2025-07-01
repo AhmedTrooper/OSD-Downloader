@@ -10,7 +10,7 @@
     "No update feature"
   ],
   "notes": "This is the first but complete application for general use case like downloading videos, audios, playlist",
-  "release_url": "https://github.com/AhmedTrooper/OSGUI/releases/",
+  "release_url": "https://github.com/AhmedTrooper/OSD-Downloader/releases",
   "author": "AhmedTrooper",
   "severity": "high",
   "platforms": [
