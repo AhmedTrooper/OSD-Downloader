@@ -1,0 +1,57 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "core:window:allow-minimize",
+    "core:window:allow-unmaximize",
+    "core:window:allow-set-maximizable",
+    "core:window:allow-start-dragging",
+    "core:window:allow-set-fullscreen",
+    "core:window:allow-close",
+    "os:default",
+    "shell:default",
+    "fs:allow-document-write-recursive",
+    "fs:allow-document-read-recursive",
+    "notification:default",
+    "opener:default",
+    "sql:allow-select",
+    "sql:allow-execute",
+    "sql:allow-close",
+    "sql:allow-load",
+    "store:default",
+    "shell:allow-kill",
+    "clipboard-manager:allow-read-text",
+    "clipboard-manager:allow-write-text",
+    "clipboard-manager:allow-clear",
+    {
+      "identifier": "opener:allow-open-path",
+      "allow": []
+    },
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "args": true,
+          "name": "bin/yt-dlp",
+          "sidecar": true
+        }
+      ]
+    },
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        {
+          "args": true,
+          "name": "bin/yt-dlp",
+          "sidecar": true
+        }
+      ]
+    },
+    "clipboard-manager:default"
+  ]
+}

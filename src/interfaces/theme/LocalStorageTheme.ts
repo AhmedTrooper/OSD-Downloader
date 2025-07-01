@@ -1,0 +1,1 @@
+export type  LocalStorageThemeInterface = null | "dark" | "light";

@@ -1,0 +1,21 @@
+{
+  "onlineApplicationVersion": "0.2.0",
+  "release_date": "2025-07-01",
+  "features": [
+    "Download Videos",
+    "Download Complete Playlist or selected videos from playlist"
+  ],
+  "fixed_errors": [
+    "Fetching time",
+    "No update feature"
+  ],
+  "notes": "This is the first but complete application for general use case like downloading videos, audios, playlist",
+  "release_url": "https://github.com/AhmedTrooper/OSGUI/releases/",
+  "author": "AhmedTrooper",
+  "severity": "high",
+  "platforms": [
+    "windows"
+  ],
+  "onlineYtDlpVersion": "2025.06.25",
+  "ytdlpUrl": "https://github.com/yt-dlp/yt-dlp/releases/tag/2025.06.30"
+}
